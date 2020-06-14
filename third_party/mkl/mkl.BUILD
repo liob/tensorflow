@@ -35,11 +35,23 @@ cc_library(
     visibility = ["//visibility:public"],
 )
 
+cc_import(
+    name = "iomp5",
+    interface_library = "lib/libiomp5md.lib",
+    system_provided = 1,
+)
+
+cc_import(
+    name = "mklml",
+    interface_library = "lib/mklml.lib",
+    system_provided = 1,
+)
+
 cc_library(
     name = "mkl_libs_windows",
-    srcs = [
-        "lib/libiomp5md.lib",
-        "lib/mklml.lib",
+    deps = [
+        "iomp5",
+        "mklml",
     ],
     linkopts = ["/FORCE:MULTIPLE"],
     visibility = ["//visibility:public"],
